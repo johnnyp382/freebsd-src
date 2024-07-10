@@ -23,7 +23,7 @@ jobs:
           # TODO: both Ubuntu and macOS have bmake packages, we should try them instead of bootstrapping our own copy.
           - os: macos-latest
             compiler: clang-18
-            cross-bindir: /usr/local/opt/llvm@18/bin
+            cross-bindir: /opt/homebrew/opt/llvm@18/bin
             pkgs: bmake libarchive llvm@18
           - target_arch: amd64
             target: amd64
