@@ -22,9 +22,9 @@ jobs:
         include:
           # TODO: both Ubuntu and macOS have bmake packages, we should try them instead of bootstrapping our own copy.
           - os: macos-latest
-            compiler: clang-13
-            cross-bindir: /opt/homebrew/opt/llvm@13/bin
-            pkgs: bmake libarchive llvm@13
+            compiler: clang-18
+            cross-bindir: /usr/local/opt/llvm@18/bin
+            pkgs: bmake libarchive llvm@18
           - target_arch: amd64
             target: amd64
     steps:
@@ -50,3 +50,5 @@ jobs:
         run: ./tools/build/make.py --debug $EXTRA_BUILD_ARGS TARGET=${{ matrix.target }} TARGET_ARCH=${{ matrix.target_arch }} kernel-toolchain -s -j$NPROC -DWITH_DISK_IMAGE_TOOLS_BOOTSTRAP
       - name: make buildkernel
         run: ./tools/build/make.py --debug $EXTRA_BUILD_ARGS TARGET=${{ matrix.target }} TARGET_ARCH=${{ matrix.target_arch }} KERNCONF=GENERIC NO_MODULES=yes buildkernel -s -j$NPROC $EXTRA_MAKE_ARGS
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v4.1.8
